@@ -1,102 +1,122 @@
-<div align="center">
-  <img src="preview/Banner.jpeg" alt="Dolby Atmos Banner" width="100%" />
+# Dolby Atmos Sony Xperia 5 V Magisk Module
 
-  <h1>Dolby Atmos — Sony Xperia 5 V Port</h1>
-  <p><b>System-Wide Spatial Audio & Graphic Equalizer for Modern Android (Official Magisk & Read-Only ROMs)</b></p>
+## DISCLAIMER
+- Sony & Dolby apps and blobs are owned by Sony™ & Dolby™.
+- The MIT license specified here is for the Magisk Module only, not for Sony & Dolby apps and blobs.
 
-  <p>
-    <a href="https://github.com/venky6158/DolbyAtmos-SonyXperia5V-Releases/releases/latest">
-      <img src="https://img.shields.io/github/v/release/venky6158/DolbyAtmos-SonyXperia5V-Releases?style=for-the-badge&logo=github&color=2b7de9&label=Release" alt="Latest Release" />
-    </a>
-    <a href="https://github.com/venky6158/DolbyAtmos-SonyXperia5V-Releases/releases">
-      <img src="https://img.shields.io/github/downloads/venky6158/DolbyAtmos-SonyXperia5V-Releases/total?style=for-the-badge&logo=android&color=2ea44f&label=Downloads" alt="Downloads" />
-    </a>
-    <img src="https://img.shields.io/badge/Android-11%20to%2017%2B-3ddc84?style=for-the-badge&logo=android&logoColor=white" alt="Android Versions" />
-    <img src="https://img.shields.io/badge/Root-Official%20Magisk%20%7C%20KSU%20%7C%20APatch-ff6f00?style=for-the-badge" alt="Root Support" />
-  </p>
+## Descriptions
+- Equalizer sound effect ported from Sony Xperia 5 V (pdx237) and integrated as a Magisk Module for all supported and rooted devices with Magisk
+- Global type sound effect
+- Conflicted with `vendor.dolby_v3_6.hardware.dms360@2.0-service`, `vendor.dolby_sp.hardware.dmssp@2.0-service`, & `vendor.dolby.hardware.dms@1.0-service`
+- I will not porting DSEE Ultimate nor Intelligent Wind Filter because they requires Xperia Audio Hal support which only available on Xperia ROM
 
-  <p>
-    <a href="https://t.me/venky6158">
-      <img src="https://img.shields.io/badge/Telegram-@venky6158-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram" />
-    </a>
-    <a href="https://instagram.com/venky6158">
-      <img src="https://img.shields.io/badge/Instagram-@venky6158-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
-    </a>
-    <a href="https://www.linkedin.com/in/venkateshotturi/">
-      <img src="https://img.shields.io/badge/LinkedIn-Venkatesh%20Otturi-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-    </a>
-  </p>
-</div>
+## Sources
+- https://dumps.tadiphone.dev/dumps/sony/pdx237 sssi-user-14-67.1.A.2.229-1-release-keys
+- /lib64/soundfx/libswdap.so: https://github.com/XperiaLabs/vendor_sony_extra/tree/UDC/Sagami/audio
+- /lib/soundfx/libswdap.so modified by bbn
+- libsqlite.so: https://dumps.tadiphone.dev/dumps/zte/p855a01 msmnile-user-11-RKQ1.201221.002-20211215.223102-release-keys
+- libstagefright_foundation.so, libstagefrightdolby.so, libstagefright_soft_ddpdec.so, libstagefright_soft_ac4dec.so, libdeccfg.so, & media_codecs_dolby_audio.xml: https://dumps.tadiphone.dev/dumps/motorola/rhode user-12-S1SR32.38-124-3-a8403-release-keys
+- libhidlbase.so: CrDroid ROM Android 13
+- libutils.so: LineageOS 23 Android 16 BP2A.250605.031.A2 1758630651
+- libmagiskpolicy.so: Magisk (stable) 30.7 (30700)
 
----
+## Changelog
 
-### ✨ Overview
+v2.1
+- Fix manifest.xml detection bug in some ROMs
+- Fix sepolicy denial
 
-A modernized, split-architecture port of the **Sony Xperia 5 V (`pdx237`) Dolby Atmos** sound engine, engineered to run smoothly on **Official Magisk**, **KernelSU**, and **APatch**—including strict **Read-Only (`EROFS` / `EXT4`)** stock and custom ROMs without bootloops.
+v2.0
+- Check functions in mirror /apex files instead of mirror /system if exist
+- Remove hardware services conflict restart (Use this instead: https://github.com/reiryuki/Hardware-Services-Restarter-Magisk-Module)
+- Fix sepolicy denial
 
-This release requires **two components** working together:
-1. **Sony Dolby Atmos Magisk Module (Drivers & Services)** — Installs the systemless audio libraries, `daxService`, and native DMS hardware daemon.
-2. **Sony Dolby Atmos Standalone APK (UI App)** — Provides the Sony Xperia equalizer and spatial audio control interface.
+v1.9
+- Support NoMount metamodule
+- Resets module folders/files permissions at post-fs-data
+- Move _uninstall.log to /data/adb/logs/
+- Hides in-bulit LunarisDolby.apk
+- Removes conflicted weird modules
 
----
+v1.8
+- Update libmagiskpolicy.so from Magisk (stable) 30.7 (30700) (fixes selinux denials in KernelSU)
+- Does not disable raw playback (You can use Audio Compatibility Patch Reborn Magisk Module instead)
 
-### 📱 Screenshots
+v1.7
+- Fix wrong target in latest KernelSU
+- Improve detections
 
-<div align="center">
-  <img src="preview/Screenshots/Screenshot_20261112-181940.png" alt="Dolby Atmos Xperia 5 V UI Preview 1" width="30%" />
-  <img src="preview/Screenshots/Screenshot_20261112-181943.png" alt="Dolby Atmos Xperia 5 V UI Preview 2" width="30%" />
-  <img src="preview/Screenshots/Screenshot_20261112-181949.png" alt="Dolby Atmos Xperia 5 V UI Preview 3" width="30%" />
-  <br><br>
-  <img src="preview/Screenshots/Screenshot_20261112-181953.png" alt="Dolby Atmos Xperia 5 V UI Preview 4" width="30%" />
-  <img src="preview/Screenshots/Screenshot_20261112-181956.png" alt="Dolby Atmos Xperia 5 V UI Preview 5" width="30%" />
-  <img src="preview/Screenshots/Screenshot_20261112-181959.png" alt="Dolby Atmos Xperia 5 V UI Preview 6" width="30%" />
-  <br><br>
-  <img src="preview/Screenshots/Screenshot_20261112-182022.png" alt="Dolby Atmos Xperia 5 V UI Preview 7" width="30%" />
-</div>
+v1.6
+- Fix wrong manifest.xml location patch target in latest Magisk version
+
+v1.5
+- Tidy up aml.sh
+- Exclude \*audio\*effects\*haptic\*.xml
+- Fix wrong file permissions in some ROMs
+
+v1.4
+- Forgot to patch libdlbvol.so & libdlbpreg.so
+
+v1.3
+- Fix ZN7android8String16aSEOS0 function not found in some ROMs
+- Add libutils.so as system_support
+- Abort installation if fail to mount mirror system
+
+v1.2
+- Fake Kitsune Mask detection
+- Improve /odm and /my_product support detection
+
+## Screenshots
+https://t.me/ryukimodsscreenshots/7
+
+## Requirements
+- arm64-v8a architecture
+- Android 11 (SDK 30) and up
+- HIDL audio service
+- Magisk or Kitsune Mask or KernelSU or Apatch installed (Recommended to use Magisk Delta/Kitsune Mask for systemless early init mount manifest.xml if your ROM is Read-Only https://t.me/ryukinotes/49)
+
+## WARNING!!!
+Possibility of bootloop or even softbrick or a service failure on Read-Only ROM if you don't use Magisk Delta/Kitsune Mask.
+
+## Installation Guide & Download Link
+- Recommended to use Magisk Delta/Kitsune Mask https://t.me/ryukinotes/49
+- Remove any other else Dolby MAGISK MODULE with different name (no need to remove if it's the same name)
+- Reboot
+- If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs or https://github.com/KernelSU-Modules-Repo/magic_mount_rs or https://github.com/KernelSU-Modules-Repo/hybrid_mount or https://github.com/maxsteeel/nomount first depending on ROM compatibility
+- If you have Dolby in-built in your ROM, then you need to activate data.cleanup=1 at the first time install (READ Optionals bellow!)
+- Install this module https://github.com/reiryuki/Dolby-Atmos-Sony-Xperia-5-V-Magisk-Module via Magisk app or Kitsune Mask app or KernelSU app or Apatch app or Recovery if Magisk or Kitsune Mask installed
+- Install AML Magisk Module https://t.me/ryukinotes/34 only if using any other else audio mod module
+- Reboot
+- If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot afterwards
+- If you are using SUList, you need to allow list manually your home launcher app (enable show system apps) and reboot afterwards
+- If you have vibrator, camera, charging/USB, SIM card/RIL, display, brightness, WiFi, thermal, and sensors issues (fingerprint, proximity, gyroscope, etc.), then install https://github.com/reiryuki/Hardware-Services-Restarter-Magisk-Module also
+
+## Optionals
+- https://t.me/ryukinotes/8
+- Global: https://t.me/ryukinotes/35
+- Stream: https://t.me/ryukinotes/52
+
+## Troubleshootings
+- https://t.me/ryukinotes/10
+- https://t.me/ryukinotes/11
+- Global: https://t.me/ryukinotes/34
+
+## Known Issue
+Unsupported in some SDK 30 ROM or maybe it's just unsupported in SDK 30? I don't know.
+
+## Support & Bug Report
+- https://t.me/ryukinotes/54
+- If you don't do above, issues will be closed immediately
+
+## Credits and Contributors
+- @HuskyDG
+- https://t.me/viperatmos
+- https://t.me/androidryukimodsdiscussions
+- @HELLBOY017
+- @ahnet_h & bbn
+- https://t.me/androidappsportdevelopment
+
+## Sponsors
+https://t.me/ryukinotes/25
 
 
-
----
-
-### 🚀 Key Improvements & Fixes
-
-- **Persistent System-Wide Processing (Session 0):** Keeps `com.dolby.daxservice` active in the background and exempt from Doze/AppOps throttling so Dolby effects stay active across Spotify, YouTube, Poweramp, and games—not just inside the Dolby UI.
-- **Real-Time UI State Synchronization:** Fixed the `MusicSubFragment` `NullPointerException` crash-relaunch loop (`mMusicOffHeadImage`) so preset toggles, EQ bands, and virtualizer buttons update instantaneously on tap.
-- **Modern SDK & Hidden API Compatibility:** Automatically applies hidden API policy exemptions so the standalone user-space APK links cleanly to Android's `AudioEffect` framework on Android 14–17+.
-- **Read-Only ROM & Official Magisk Safe:** Cleanly initializes `vendor.dolby.hardware.dms@2.0-service` and merges audio configs without requiring Magisk Delta/Kitsune early-init workarounds.
-- **Multi-Mod Friendly:** Compatible alongside other audio mods when paired with **Audio Modification Library (AML)**.
-
----
-
-### 📥 How to Install
-
-> [!IMPORTANT]
-> **Both files are required.** You must flash the **Sony Dolby Atmos Magisk Module** and reboot **before** installing the **Sony Dolby Atmos Standalone APK**.
-
-1. **Download Both Files** from [**Releases**](https://github.com/venky6158/DolbyAtmos-SonyXperia5V-Releases/releases/latest):
-   - `DolbyAtmos-SonyXperia5V-Driver-Only.zip` *(Magisk Driver Module)*
-   - `DolbyAtmos-SonyXperia5V-Standalone.apk` *(Sony Dolby Atmos UI App)*
-2. **Flash the Magisk Module:**
-   - Open **Official Magisk** (or KernelSU / APatch) → **Modules** → **Install from storage**.
-   - Select `DolbyAtmos-SonyXperia5V-Driver-Only.zip` and wait for installation to complete.
-3. **Reboot Your Device:**
-   - Restart your phone so the native `dms@2.0-service` daemon and `daxService` initialize properly.
-4. **Install the Standalone APK:**
-   - After rebooting, install `DolbyAtmos-SonyXperia5V-Standalone.apk` like a normal Android app and launch it.
-5. *(Optional)* If you use additional audio mods simultaneously, flash [**Audio Modification Library (AML)**](https://github.com/Magisk-Modules-Repo/aml) so all effects chain cleanly on Session 0.
-
-> [!NOTE]
-> - **Custom EQ Sliders:** Switch from **Dynamic** to **Custom** profile inside the app to unlock the 10-band Graphic Equalizer, Surround Virtualizer, and Dialogue Enhancer.
-> - **Independent Device Profiles:** Dolby maintains separate sound profiles for **Phone Speaker**, **Wired Headphones**, and **Bluetooth** devices.
-
----
-
-### 🙏 Credits & Developer
-
-- **Dolby Laboratories & Sony Mobile** — Original Xperia 5 V (`pdx237`) audio binaries and DSP tuning.
-- **[Rei Ryuki](https://github.com/reiryuki)** — Foundational [Dolby Atmos Sony Xperia 5 V Magisk Module](https://github.com/reiryuki/Dolby-Atmos-Sony-Xperia-5-V-Magisk-Module) and reverse-engineering research.
-- **Venkatesh Otturi** — Modern Android / Official Magisk & Read-Only ROM port, background persistence fixes, and standalone APK patches.
-  - **GitHub:** [@venky6158](https://github.com/venky6158)
-  - **Telegram:** [@venky6158](https://t.me/venky6158)
-  - **Instagram:** [@venky6158](https://instagram.com/venky6158)
-  - **LinkedIn:** [linkedin.com/in/venkateshotturi](https://www.linkedin.com/in/venkateshotturi/)

@@ -1,0 +1,6 @@
+id=DolbyAtmos
+name=Dolby Atmos Sony Xperia 5 V (Driver Only)
+version=v1.0-Fixed
+versionCode=10
+author=Rei Ryuki the Fixer & Ported by Venkatesh Otturi
+description=[Driver Only | Root Causes Fixed] Background audio processing permanently active across all apps + Real-time instant UI button updates. Android 11-17+.
